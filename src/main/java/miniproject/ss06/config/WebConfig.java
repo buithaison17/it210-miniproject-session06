@@ -18,7 +18,7 @@ import org.thymeleaf.templatemode.TemplateMode;
 public class WebConfig implements WebMvcConfigurer {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addRedirectViewController("/", "/courses");
+        registry.addViewController("/").setViewName("layout/main-layout");
     }
 
     @Bean
