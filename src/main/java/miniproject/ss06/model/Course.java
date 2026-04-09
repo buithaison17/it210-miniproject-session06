@@ -10,12 +10,16 @@ public class Course {
     private String teacherName;
     private String duration;
     private double price;
+
     private boolean isFull;
+    private int studentCount;
 
     public Course() {
     }
 
-    public Course(int id, String courseName, LevelCourse levelCourse, String description, String teacherName, String duration, double price, boolean isFull) {
+    public Course(int id, String courseName, LevelCourse levelCourse,
+                  String description, String teacherName, String duration,
+                  double price, boolean isFull, int studentCount) {
         this.id = id;
         CourseName = courseName;
         this.levelCourse = levelCourse;
@@ -24,6 +28,7 @@ public class Course {
         this.duration = duration;
         this.price = price;
         this.isFull = isFull;
+        this.studentCount = studentCount;
     }
 
     public int getId() {
@@ -88,5 +93,13 @@ public class Course {
 
     public void setFull(boolean full) {
         isFull = full;
+    }
+
+    public int getStudentCount() {
+        return studentCount;
+    }
+
+    public void setStudentCount(int studentCount) {
+        this.studentCount = studentCount;
     }
 }

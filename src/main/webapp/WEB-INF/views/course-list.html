@@ -15,7 +15,16 @@
 </head>
 <body>
 <div th:fragment="content">
-    <div>ĐÂY LÀ NỘI DUNG</div>
+    <div th:if="${error}" class="alert alert-danger">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${success}" class="alert alert-success">
+        <p th:text="${success}"></p>
+    </div>
+    <form th:action="@{'/courses/delete/' + ${course.id}}" method="post">
+        <button type="submit" class="btn btn-danger">Hủy</button>
+    </form>
 </div>
 
 <!-- Optional JavaScript -->
