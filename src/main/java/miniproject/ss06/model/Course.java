@@ -4,6 +4,7 @@ import miniproject.ss06.enums.LevelCourse;
 
 public class Course {
     private int id;
+    private String courseCode;
     private String CourseName;
     private LevelCourse levelCourse;
     private String description;
@@ -17,10 +18,11 @@ public class Course {
     public Course() {
     }
 
-    public Course(int id, String courseName, LevelCourse levelCourse,
+    public Course(int id,String courseCode, String courseName, LevelCourse levelCourse,
                   String description, String teacherName, String duration,
                   double price, boolean isFull, int studentCount) {
         this.id = id;
+        this.courseCode = courseCode;
         CourseName = courseName;
         this.levelCourse = levelCourse;
         this.description = description;
@@ -37,6 +39,14 @@ public class Course {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getCourseCode() {
+        return courseCode;
+    }
+
+    public void setCourseCode(String courseCode) {
+        this.courseCode = courseCode;
     }
 
     public String getCourseName() {
