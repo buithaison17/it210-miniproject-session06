@@ -41,6 +41,16 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
+    public Course findById(String id) {
+        return null;
+    }
+
+    @Override
+    public void delete(String id) {
+
+    }
+
+    @Override
     public Course findById(int id) {
         return courses.stream()
                 .filter(c -> c.getId() == id)

@@ -4,31 +4,73 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/main-layout}">
 <head>
-    <title>Danh sách</title>
-    <!-- Required meta tags -->
+    <title>Danh sach</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div th:fragment="content">
-    <div th:if="${error}" class="alert alert-danger">
-        <p th:text="${error}"></p>
-    </div>
+<div layout:fragment="content">
 
-    <div th:if="${success}" class="alert alert-success">
-        <p th:text="${success}"></p>
-    </div>
-    <form th:action="@{'/courses/delete/' + ${course.id}}" method="post">
-        <button type="submit" class="btn btn-danger">Hủy</button>
+    <h3>Danh sach khoa hoc</h3>
+
+    <form method="get" th:action="@{/courses}" class="mb-3">
+        <select name="level" class="form-control mb-2">
+            <option value="BEGINNER" th:selected="${selectedLevel=='BEGINNER'}">Beginner</option>
+            <option value="INTERMEDIATE" th:selected="${selectedLevel=='INTERMEDIATE'}">Intermediate</option>
+            <option value="ADVANCED" th:selected="${selectedLevel=='ADVANCED'}">Advanced</option>
+        </select>
+
+        <input type="number" name="maxPrice" class="form-control mb-2"
+               placeholder="Hoc phi toi da"
+               th:value="${maxPrice}">
+
+        <button class="btn btn-primary">Tim kiem</button>
     </form>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Ten khoa hoc</th>
+            <th>Giang vien</th>
+            <th>Level</th>
+            <th>Gia</th>
+            <th>Xem chi tiet</th>
+            <th>Cap nhat</th>
+            <th>Xoa</th>
+        </tr>
+
+        <tr th:each="c : ${courses}">
+            <td th:text="${c.courseName}"></td>
+            <td th:text="${c.teacherName}"></td>
+            <td th:text="${c.levelCourse}"></td>
+            <td th:text="${#numbers.formatDecimal(c.price,0,'COMMA',0,'POINT')} + ' VND'"></td>
+            <td>
+                <a class="btn btn-info btn-sm" th:href="@{/courses/detail/{id}(id=${c.id})}">Xem</a>
+            </td>
+            <td>
+                <a class="btn btn-warning btn-sm" th:href="@{/courses/update/{id}(id=${c.id})}">Cap nhat</a>
+            </td>
+            <td>
+                <form th:action="@{/courses/delete/{id}(id=${c.id})}"
+                      method="post"
+                      onsubmit="return confirm('Bạn chắc chắn muốn hủy khóa học này?');">
+
+                    <button class="btn btn-danger btn-sm" type="submit">
+                        Hủy
+                    </button>
+                </form>
+            </td>
+        </tr>
+    </table>
+
+    <p th:if="${#lists.isEmpty(courses)}" class="text-danger">
+        Hien chua co lop hoc phu hop voi trinh do nay
+    </p>
+
 </div>
 
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>

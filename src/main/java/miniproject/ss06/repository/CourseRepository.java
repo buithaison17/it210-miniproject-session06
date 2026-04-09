@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface CourseRepository {
     List<Course> findAll();
+    Course findById(String id);
+    void delete(String id);
+
     Course findById(int id);
+
     void delete(int id);
 }
